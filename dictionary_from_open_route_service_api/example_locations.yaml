@@ -1,0 +1,9 @@
+locations:
+  - name: "Times Square"
+    coords: [40.7580, -73.9855]
+  - name: "Central Park"
+    coords: [40.7812, -73.9665]
+  - name: "Empire State Building"
+    coords: [40.748817, -73.985428]
+  - name: "Brooklyn Bridge"
+    coords: [40.7061, -73.9969]
