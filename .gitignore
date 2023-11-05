@@ -1,0 +1,9 @@
+# Ignore API key files
+*.key
+
+# Ignore shared library files
+*.so
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
