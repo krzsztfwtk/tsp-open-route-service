@@ -18,7 +18,7 @@ except ImportError as e:
 def read_distances(file_path):
     with open(file_path, 'r') as file:
         data = yaml.safe_load(file)
-    return data['distances']
+    return data
 
 def read_config(file_path):
     with open(file_path, 'r') as file:
@@ -86,7 +86,8 @@ if __name__ == "__main__":
 
     # Solve the TSP using the C++ module if available, otherwise use the Python function
     if cpp_module_available:
-        # Convert the Python dictionary to the C++ Graph structure
+        print(distances)
+
         cpp_distances = {
             start: {
                 end: tsp_solver.Edge(metrics['distance_km'], metrics['duration_min'])

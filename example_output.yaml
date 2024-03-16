@@ -4,7 +4,7 @@ shortest_path:
 - Brooklyn Bridge
 - Central Park
 - Times Square
-solving_time_seconds: 2.3603439331054688e-05
+solving_time_seconds: 5.3882598876953125e-05
 total_cost: 42.167649999999995
 total_distance_km: 26.3515
 total_duration_min: 43.925
