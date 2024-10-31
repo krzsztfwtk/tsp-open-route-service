@@ -55,6 +55,14 @@ The GUI allows you to:
 - **Generate & calculate the optimal route**.
 - **Visualize the route** on a map directly in your browser.
 
+### Distance vs. Duration Weights
+
+In the TSP Solver, the **distance** and **duration** weights control the optimization goal when calculating the optimal route. Setting a higher weight for distance prioritizes shorter physical distances between stops, while a higher weight for duration focuses on minimizing travel time. The weights must sum to 1, allowing you to balance between distance and time based on your preference. For example, setting `distance_km: 0.1` and `duration_min: 0.9` means the solver will prioritize minimizing time of travel more than distance.
+
+### Editing or Removing Locations
+
+To edit or remove locations, you can directly modify the file located at `./temp/locations.yaml`. This file stores all added locations with their coordinates. Open it in a text editor, make any necessary changes, and save the file. The GUI will reflect these changes the next time it’s launched.
+
 ### Switching to the Command-Line Only Version
 
 If you want to use the project without the GUI, switch to the `no-gui` branch, where detailed instructions on using each script individually are provided:
