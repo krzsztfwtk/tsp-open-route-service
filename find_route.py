@@ -115,7 +115,7 @@ if __name__ == "__main__":
     elapsed_time = end_time - start_time
 
     output_data = {
-        'shortest_path': shortest_path,
+        'shortest_path': list(shortest_path), # to avoid !!python/tuple in yaml output
         'total_cost': min_cost,
         'total_distance_km': total_distance,
         'total_duration_min': total_duration,
