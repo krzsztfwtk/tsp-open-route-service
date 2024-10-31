@@ -20,13 +20,16 @@ The project is organized as follows:
 
 ### Prerequisites
 
-1. **API Key**: Obtain an API key from OpenRouteService and save it in a file named `api.key` in the main directory.
+1. **API Key**: Obtain an API key from [OpenRouteService](https://openrouteservice.org/) and save it in a file named `api.key` in the main directory.
 2. **Dependencies**:
-   - Install required Python packages:
-     ```bash
-     pip install folium openrouteservice networkx pybind11 backoff
-     ```
-   - A C++ compiler with C++17 support is recommended if you wish to compile the TSP algorithm for better performance.
+
+- Install required Python packages:
+
+```bash
+pip install folium openrouteservice networkx pybind11 backoff
+```
+
+- A C++ compiler with C++17 support is recommended if you wish to compile the TSP algorithm for better performance.
 
 ### Compilation (Optional)
 
