@@ -1,6 +1,0 @@
-start_location: "Times Square"
-end_location: "Times Square"
-required_stops: ["Central Park", "Empire State Building", "Brooklyn Bridge"]
-weights:
-  distance_km: 0.1
-  duration_min: 0.9

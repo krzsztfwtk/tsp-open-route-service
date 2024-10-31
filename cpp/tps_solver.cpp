@@ -4,6 +4,7 @@
 #include <limits>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -49,10 +50,15 @@ std::tuple<std::vector<std::string>, double, double, double> solve_tsp(
         double distance = 0;
         double duration = 0;
         for (size_t i = 0; i < locations.size() - 1; ++i) {
-            const Edge& edge = graph.at(locations[i]).at(locations[i+1]);
-            cost += calculate_cost(edge.distance_km, edge.duration_min, weight_distance, weight_duration);
-            distance += edge.distance_km;
-            duration += edge.duration_min;
+            try {
+                const Edge& edge = graph.at(locations[i]).at(locations[i+1]);
+                cost += calculate_cost(edge.distance_km, edge.duration_min, weight_distance, weight_duration);
+                distance += edge.distance_km;
+                duration += edge.duration_min;
+            } catch (const std::out_of_range& e) {
+                std::cerr << "Edge not found between " << locations[i] << " and " << locations[i+1] << std::endl;
+                throw;
+            }
         }
         if (cost < min_cost) {
             min_cost = cost;
