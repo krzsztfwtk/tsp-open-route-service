@@ -7,3 +7,6 @@
 # Ignore compiled Python files
 *.pyc
 __pycache__/
+
+# Ignore temporary files generated in the temp directory
+temp/
