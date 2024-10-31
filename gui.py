@@ -94,9 +94,33 @@ def save_configurations():
 
 def generate_files_and_calculate_route():
     save_configurations()
-    subprocess.run(["python3", "generate_distances.py", "-i", os.path.join(temp_dir, "locations.yaml"), "-o", os.path.join(temp_dir, "distances.yaml")])
-    subprocess.run(["python3", "find_route.py", "-d", os.path.join(temp_dir, "distances.yaml"), "-c", os.path.join(temp_dir, "config.yaml"), "-o", os.path.join(temp_dir, "route_output.yaml")])
-
+    
+    distances_file = os.path.join(temp_dir, "distances.yaml")
+    
+    # Check if the distances file already exists
+    if os.path.exists(distances_file):
+        # Run generate_distances.py with the existing distances file as input for -d
+        subprocess.run([
+            "python3", "generate_distances.py", 
+            "-i", os.path.join(temp_dir, "locations.yaml"), 
+            "-d", distances_file, 
+            "-o", distances_file  # Overwrite or update the existing distances file
+        ])
+    else:
+        # Run generate_distances.py without -d if distances file doesn't exist
+        subprocess.run([
+            "python3", "generate_distances.py", 
+            "-i", os.path.join(temp_dir, "locations.yaml"), 
+            "-o", distances_file
+        ])
+    
+    # Run find_route.py with the distances and config files
+    subprocess.run([
+        "python3", "find_route.py", 
+        "-d", distances_file, 
+        "-c", os.path.join(temp_dir, "config.yaml"), 
+        "-o", os.path.join(temp_dir, "route_output.yaml")
+    ])
 def draw_map():
     subprocess.run(["python3", "draw_route_on_map.py", "-l", os.path.join(temp_dir, "locations.yaml"), "-r", os.path.join(temp_dir, "route_output.yaml"), "-o", os.path.join(temp_dir, "map.html")])
     webbrowser.open(os.path.join(temp_dir, "map.html"))
