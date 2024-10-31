@@ -58,13 +58,31 @@ The GUI allows you to:
 - **Generate & calculate the optimal route**.
 - **Visualize the route** on a map directly in your browser.
 
+### Adding Locations
+
+When using the `Add Location` feature in the GUI, enter coordinates in the format latitude, longitude, separated by a comma, as they appear when copied from Google Maps. For example:
+
+```text
+51.53142568555182, -0.12251659197843902
+```
+
 ### Distance vs. Duration Weights
 
 In the TSP Solver, the **distance** and **duration** weights control the optimization goal when calculating the optimal route. Setting a higher weight for distance prioritizes shorter physical distances between stops, while a higher weight for duration focuses on minimizing travel time. The weights must sum to 1, allowing you to balance between distance and time based on your preference. For example, setting `distance_km: 0.1` and `duration_min: 0.9` means the solver will prioritize minimizing time of travel more than distance.
 
-### Editing or Removing Locations
+### Editing or Removing Locations and Distances
 
 To edit or remove locations, you can directly modify the file located at `./temp/locations.yaml`. This file stores all added locations with their coordinates. Open it in a text editor, make any necessary changes, and save the file. The GUI will reflect these changes the next time it’s launched.
+
+Similarly, you can delete `./temp/distances.yaml` occasionally to force the program to fetch updated distances from the API. This is useful if road data has changed in reality, as it allows the distances to reflect the latest information.
+
+### Rate limit control
+
+In the `generate_distances.py` file, you can adjust the following variable to control the delay between requests and help avoid API rate limit issues:
+
+```python
+rate_limit_sleep = 1.2  # Delay between requests in seconds to avoid rate limit
+```
 
 ### Switching to the Command-Line Only Version
 
