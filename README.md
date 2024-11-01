@@ -2,7 +2,11 @@
 
 This project is designed to solve the Traveling Salesman Problem (TSP) for car routes using real road distances from the OpenRouteService API. It includes a GUI built with tkinter package for easy setup and configuration, scripts for fetching distances, a Python and C++ implementation for solving the TSP, and a map visualization of the route. The GUI is built on top of these scripts to simplify the process for users.
 
-![TSP Solver GUI](screenshot.png)
+![TSP Solver GUI](screenshot1.png)
+
+![Terminal output](screenshot2.png)
+
+![Result map](screenshot3.png)
 
 ## Project Structure
 
@@ -44,7 +48,7 @@ g++ -O3 -Wall -shared -std=c++2a -fPIC $(python3 -m pybind11 --includes) cpp/tps
 To start the GUI, simply run:
 
 ```bash
-python3 gui.py
+python gui.py # or python3 gui.py depending on your configuration
 ```
 
 The GUI handles everything automatically, from setting up locations and route preferences to calculating the optimal route and visualizing it on a map. This makes it easy to use without needing to run each script separately.
@@ -76,6 +80,22 @@ To edit or remove locations, you can directly modify the file located at `./temp
 
 Similarly, you can delete `./temp/distances.yaml` occasionally to force the program to fetch updated distances from the API. This is useful if road data has changed in reality, as it allows the distances to reflect the latest information.
 
+### Walking instead of driving car?
+
+Open file `generate_distances.py` and edit this line:
+
+```python
+profile = 'driving-car'
+```
+
+Open file `draw_route_on_map.py` and edit this function:
+
+```python
+def get_route(client, coords):
+    return client.directions(coordinates=coords, profile='driving-car', format='geojson')
+```
+
+
 ### Rate limit control
 
 In the `generate_distances.py` file, you can adjust the following variable to control the delay between requests and help avoid API rate limit issues:
@@ -104,7 +124,11 @@ If you encounter issues importing the `tsp_solver` module (the compiled C++ shar
 tsp_solver.cpython-310-x86_64-linux-gnu.so
 ```
 
-Copy and paste this exact name even if it appears your file already matches this, as character encoding sometimes cause issues. This specific filename applies only if your system architecture is `x86-64-linux-gnu`.
+### Troubleshooting Python Interpreter Issues
+
+If you encounter errors like `ModuleNotFoundError: No module named 'openrouteservice'` or `FileNotFoundError: [Errno 2] No such file or directory: 'python3'`, it might be due to a mismatch between the Python interpreter used to install packages and the interpreter used by the program: `gui.py` calls `python3` via subprocess, which could differ from your default python installation (especially if you are using Microsoft Windows).
+
+If this is your case, open `gui.py` and replace all instances of `python3` with `python` in subprocess calls.
 
 ### Command Line Usage
 
