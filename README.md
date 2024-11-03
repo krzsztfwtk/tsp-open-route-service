@@ -128,7 +128,17 @@ tsp_solver.cpython-310-x86_64-linux-gnu.so
 
 If you encounter errors like `ModuleNotFoundError: No module named 'openrouteservice'` or `FileNotFoundError: [Errno 2] No such file or directory: 'python3'`, it might be due to a mismatch between the Python interpreter used to install packages and the interpreter used by the program: `gui.py` calls `python3` via subprocess, which could differ from your default python installation (especially if you are using Microsoft Windows).
 
-If this is your case, open `gui.py` and replace all instances of `python3` with `python` in subprocess calls.
+If this is your case, open `gui.py` and replace the line:
+
+```python
+python_interpreter = "python3"
+```
+
+to:
+
+```python
+python_interpreter = "python" # or different depending on your configuration
+```
 
 ### Command Line Usage
 

@@ -5,6 +5,8 @@ import subprocess
 import os
 import webbrowser
 
+python_interpreter = "python3"
+
 def str_presenter(dumper, data):
     return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='"')
 
@@ -101,7 +103,7 @@ def generate_files_and_calculate_route():
     if os.path.exists(distances_file):
         # Run generate_distances.py with the existing distances file as input for -d
         subprocess.run([
-            "python3", "generate_distances.py", 
+            python_interpreter, "generate_distances.py", 
             "-i", os.path.join(temp_dir, "locations.yaml"), 
             "-d", distances_file, 
             "-o", distances_file  # Overwrite or update the existing distances file
@@ -109,20 +111,20 @@ def generate_files_and_calculate_route():
     else:
         # Run generate_distances.py without -d if distances file doesn't exist
         subprocess.run([
-            "python3", "generate_distances.py", 
+            python_interpreter, "generate_distances.py", 
             "-i", os.path.join(temp_dir, "locations.yaml"), 
             "-o", distances_file
         ])
     
     # Run find_route.py with the distances and config files
     subprocess.run([
-        "python3", "find_route.py", 
+        python_interpreter, "find_route.py", 
         "-d", distances_file, 
         "-c", os.path.join(temp_dir, "config.yaml"), 
         "-o", os.path.join(temp_dir, "route_output.yaml")
     ])
 def draw_map():
-    subprocess.run(["python3", "draw_route_on_map.py", "-l", os.path.join(temp_dir, "locations.yaml"), "-r", os.path.join(temp_dir, "route_output.yaml"), "-o", os.path.join(temp_dir, "map.html")])
+    subprocess.run([python_interpreter, "draw_route_on_map.py", "-l", os.path.join(temp_dir, "locations.yaml"), "-r", os.path.join(temp_dir, "route_output.yaml"), "-o", os.path.join(temp_dir, "map.html")])
     webbrowser.open(os.path.join(temp_dir, "map.html"))
 
 root = tk.Tk()
