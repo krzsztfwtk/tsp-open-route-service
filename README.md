@@ -124,6 +124,8 @@ If you encounter issues importing the `tsp_solver` module (the compiled C++ shar
 tsp_solver.cpython-310-x86_64-linux-gnu.so
 ```
 
+This only applies to GNU/Linux OS and x86 64-bit CPU. To avoid character encoding issues, copy filename from above and paste it directly.
+
 ### Troubleshooting Python Interpreter Issues
 
 If you encounter errors like `ModuleNotFoundError: No module named 'openrouteservice'` or `FileNotFoundError: [Errno 2] No such file or directory: 'python3'`, it might be due to a mismatch between the Python interpreter used to install packages and the interpreter used by the program: `gui.py` calls `python3` via subprocess, which could differ from your default python installation (especially if you are using Microsoft Windows).
